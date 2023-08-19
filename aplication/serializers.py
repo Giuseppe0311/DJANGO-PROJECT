@@ -6,3 +6,9 @@ class TblTipoEmpresaSerializer(serializers.ModelSerializer):
     class Meta:
         model = TblTipoEmpresa
         fields = '__all__'
+
+
+class MovcontablesdnodomiciSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movcontablesdnodomici
+        fields = '__all__'
