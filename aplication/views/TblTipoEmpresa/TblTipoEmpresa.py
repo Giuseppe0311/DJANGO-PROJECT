@@ -27,12 +27,11 @@ class TblTipoEmpresa (APIView):
     def post(self,request):
                 serializer = TblTipoEmpresaSerializer(data=request.data)    
                 if serializer.is_valid():
-                    codigo = request.data.get('codigo_tipo_empresa')
-                    descripcion = request.data.get('descripcion')
-                    if post_TbltipoEmpresa(codigo,descripcion)==True:
+                    descripcion = request.data.get('Descripcion')
+                    if post_TbltipoEmpresa(descripcion)==True:
                         return Response({"message":"data saved successful"}, status=200)
                     else:
-                        return Response(f"Error al conectar a la nueva base de datos: {post_TbltipoEmpresa(codigo, descripcion)}", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                        return Response(f"Error al conectar a la nueva base de datos: {post_TbltipoEmpresa(descripcion)}", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                 else:
                     return Response(serializer.errors, status=400)
     def put(self,request,id=None):
@@ -41,14 +40,13 @@ class TblTipoEmpresa (APIView):
         else:
             serializer=  TblTipoEmpresaSerializer(data=request.data)
             if serializer.is_valid():
-                codigo = request.data.get('codigo_tipo_empresa')
-                descripcion = request.data.get('descripcion')
-                estado = request.data.get('estado')
-                print(estado)
-                if put_TbltipoEmpresa(codigo,descripcion)==True:
+                descripcion = request.data.get('Descripcion')
+                if put_TbltipoEmpresa(id,descripcion)==True:
                     return Response({"message":"data updated successful"}, status=200)
                 else:
-                    return Response(f"Error al conectar a la nueva base de datos: {put_TbltipoEmpresa(codigo, descripcion)}", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                    return Response(f"Error al conectar a la nueva base de datos: {put_TbltipoEmpresa(id, descripcion)}", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            else:
+                return Response(serializer.errors, status=400)
     def delete(self,request,id=None):
         if id is None:
             return Response({"message":"Debe especificar un id"},status=400)

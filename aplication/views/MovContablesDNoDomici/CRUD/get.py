@@ -37,7 +37,26 @@ def get_byid_MovContablesDNoDomici(id):
                     rows = cursor.fetchall()
                     data=[]
                     for row in rows:
-                        data.append({'codigo_tipo_empresa':row[0],'descripcion':row[1].strip(),'estado':row[2]})
+                        data.append({
+                               'idnodomiciliado':row[0],
+                                'movcontable_d':row[1],
+                               'codunidadeconomica':row[2].strip(),
+                                'tipodoccredfiscal':row[3].strip(),
+                                'nrodocdua':row[4].strip(),
+                                'anioduacredfiscal':row[5].strip(),
+                                'montoretigv':row[6],
+                                'pais':row[7].strip(),
+                                'nombrenodomiciliado':row[8],
+                                'rentabruta':row[9],
+                                'deduccioncosto':row[10],
+                                'rentaneta':row[11],
+                                'tasaretencion':row[12],
+                                'impuestoretenido':row[13],
+                                'convenio2imposicion':row[14].strip(),
+                                'tiporenta':row[15].strip(),
+                                'aplicaart76':row[16],
+                                'estado':row[17]
+                               })
                     return data
     except OperationalError as e:
                 return str(e)
