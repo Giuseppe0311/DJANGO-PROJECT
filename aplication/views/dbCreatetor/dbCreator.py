@@ -23,14 +23,27 @@ class TenantCreator(APIView):
         try:
             # Realiza una consulta de prueba en la base de datos dinámica
             with connections['dynamic'].cursor() as cursor:
-                #  Ruta al archivo de scriptTables SQL
-                ruta_scriptTables = os.path.join(os.path.dirname(__file__),'scripts' ,'scriptTables.sql')
-                # Ruta para las vistas
-                ruta_scriptViews = os.path.join(os.path.dirname(__file__),'scripts' ,'scriptViews.sql')
-                # Ruta para las funciones
-                ruta_scriptFuncs = os.path.join(os.path.dirname(__file__),'scripts' ,'scriptFunctions.sql')
-                # Ruta al archivo de scriptProcedures SQL
-                ruta_scriptProcs = os.path.join(os.path.dirname(__file__),'scripts' ,'scriptProcedures.sql')
+               # Obtener la ruta del archivo actual
+                ruta_actual = os.path.abspath(os.path.dirname(__file__))
+
+                    # Retroceder un nivel para llegar a la carpeta 'aplication'
+                ruta_aplication = os.path.abspath(os.path.join(ruta_actual, '..','..'))
+
+                    # Obtener la ruta de la carpeta 'scripts'
+                ruta_scripts = os.path.join(ruta_aplication,'scripts')
+
+                # Ruta para scriptTables.sql
+                ruta_scriptTables = os.path.join(ruta_scripts, 'scriptTables.sql')
+
+                # Ruta para scriptViews.sql
+                ruta_scriptViews = os.path.join(ruta_scripts, 'scriptViews.sql')
+
+                # Ruta para scriptFunctions.sql
+                ruta_scriptFuncs = os.path.join(ruta_scripts, 'scriptFunctions.sql')
+
+# Ruta para scriptProcedures.sql
+                ruta_scriptProcs = os.path.join(ruta_scripts, 'scriptProcedures.sql')
+               
                 #  Leer el contenido del archivo de scriptTable SQL
                  # Leer el contenido del archivo de scriptTable SQL
                 with open(ruta_scriptTables, 'r',encoding='utf-8') as script_file1:
